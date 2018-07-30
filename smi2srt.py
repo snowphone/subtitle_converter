@@ -8,7 +8,7 @@ _debug=False
 
 
 def isUTF8(filename: str):
-	with open(argv[1], "rb") as f:
+	with open(filename, "rb") as f:
 		data = f.read()
 	try:
 		data.decode('UTF-8')
