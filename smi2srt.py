@@ -136,5 +136,6 @@ if __name__ == "__main__":
 		SRT(ret, delay).write(subtitle)
 		print(subtitle)
 
-	for subtitle in argv[1:]:
-		os.remove(subtitle)
+	if erase_original:
+		for subtitle in argv[1:]:
+			os.remove(subtitle)
