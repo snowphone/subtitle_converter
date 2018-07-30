@@ -59,7 +59,7 @@ class SMI:
 
 	def find_sync(self, start_from):
 		''' return (index, frame)'''
-		start_pattern = re.compile(r"(?<=<SYNC Start=)\d+(?=>)")
+		start_pattern = re.compile(r"(?<=<SYNC Start=)\d+(?=><P Class=KRCC>)")
 		size = len(self.lines)
 		for i in range(start_from, size):
 			result = start_pattern.search(self.lines[i])
@@ -132,6 +132,7 @@ if __name__ == "__main__":
 		erase_original = False
 
 	for subtitle in argv[1:]:
+		assert subtitle.find(".smi") != -1
 		ret = SMI(subtitle).parse()
 		SRT(ret, delay).write(subtitle)
 		print(subtitle)
