@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+import argparse
 import os
 import re
 from sys import argv, stderr
@@ -18,7 +19,8 @@ def synchonize_name(path):
 
 
 if __name__ == "__main__":
-	try:
-		synchonize_name(argv[1])
-	except IndexError:
-		print("Usage: {} <path>".format(argv[0]))
+	parser = argparse.ArgumentParser()
+	parser.add_argument("path", help="set a path that contains pairs of (video, subtitle)")
+	
+	args = parser.parse_args()
+	synchonize_name(args.path)
