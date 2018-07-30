@@ -114,29 +114,20 @@ class SRT:
 
 
 if __name__ == "__main__":
-	if len(argv) == 1:
-		print("Usage: {} [-delay <sec> -clean] smi_files...".format(argv[0]), file=stderr)
+	parser = argparse.ArgumentParser()
+	parser.add_argument("subtitle_list", help="one or more smi file paths", nargs="+")
+	parser.add_argument("-c", "--clean", help="remove the original smi files", action="store_true")
+	parser.add_argument("-d", "--delay", help="correct subtitle sync. set a float number in seconds", type=float, default=0)
 
-	if argv.count("-delay"):
-		i = argv.index("-delay") + 1
-		delay = float(argv[i])
-		argv.pop(i)
-		argv.remove("-delay")
-	else:
-		delay = 0
+	args = parser.parse_args()
 
-	if argv.count("-clean"):
-		erase_original = True 
-		argv.remove("-clean")
-	else:
-		erase_original = False
 
-	for subtitle in argv[1:]:
+	for subtitle in args.subtitle_list:
 		assert subtitle.find(".smi") != -1
 		ret = SMI(subtitle).parse()
-		SRT(ret, delay).write(subtitle)
+		SRT(ret, args.delay).write(subtitle)
 		print(subtitle)
 
-	if erase_original:
+	if args.clean:
 		for subtitle in argv[1:]:
 			os.remove(subtitle)
