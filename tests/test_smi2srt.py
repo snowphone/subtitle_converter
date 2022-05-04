@@ -8,10 +8,13 @@ from srt import SRT
     "file_path,path_expected",
     [
         (
-            "test/resource/kill_bill.euckr.smi",
-            "test/resource/kill_bill.output",
+            "tests/resource/kill_bill.euckr.smi",
+            "tests/resource/kill_bill.output",
         ),
-        ("test/resource/spiderman.utf8.smi", "test/resource/spiderman.output"),
+        (
+            "tests/resource/spiderman.utf8.smi",
+            "tests/resource/spiderman.output",
+        ),
     ],
 )
 def test_converting(file_path: str, path_expected: str):
