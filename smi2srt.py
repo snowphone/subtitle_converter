@@ -2,7 +2,6 @@
 import argparse
 import logging
 import os
-from sys import argv
 
 from smi import SMI
 from srt import SRT
@@ -21,10 +20,10 @@ def main(args: argparse.Namespace):
         SRT(frame_list, args.delay).write_to(new_filename)
         logging.info(f"{subtitle_path} -> {new_filename}")
 
-    if args.clean:
-        for subtitle_path in argv[1:]:
+        if args.clean:
             os.remove(subtitle_path)
             logging.info(f"{subtitle_path} removed")
+
     return
 
 
